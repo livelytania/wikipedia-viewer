@@ -35,15 +35,19 @@
                 
                 function logResults(json) {console.log(json);}
                 
-                $.ajax( {
-                    url: 'https://en.wikipedia.org/w/api.php?action=query&titles=' + keyword + '&prop=revisions&rvprop=content&format=json',
+                $.ajax({
+                    url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=info%7Cextracts&generator=search&exsentences=1&exlimit=10&exintro=1&gsrsearch=' + keyword + '&gsrnamespace=0&gsrlimit=10',
                     dataType: 'jsonp',
                     jsonpCallback: 'logResults',
                     type: 'GET',
                     success: function(data) {
-                       alert('success');
+                        alert('sucess');
+                        var obj = data['query']['pages'];
+                        $.each(obj, function(key,value) {
+                            console.log(this.title + ": " + this.extract);
+                        });
                     }
-                } );
+                });
                 
             });
             
