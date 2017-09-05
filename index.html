@@ -25,7 +25,7 @@
                 <button type="submit">
                     <i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
             </form>
-            <div class="results"></div>
+            <div class="results-container"></div>
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -37,7 +37,7 @@
                 event.preventDefault();
                 
                 // clear previous search results
-                $('.results').empty();
+                $('.results-container').empty();
                 
                 // get user input
                 var keyword = $('input').val();
@@ -47,14 +47,14 @@
                 function logResults(json) {console.log(json);}
                 
                 $.ajax({
-                    url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=info%7Cextracts&generator=search&exsentences=1&exlimit=10&exintro=1&gsrsearch=' + keyword + '&gsrnamespace=0&gsrlimit=10',
+                    url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=info%7Cextracts&generator=search&exsentences=1&exlimit=9&exintro=1&gsrsearch=' + keyword + '&gsrnamespace=0&gsrlimit=10',
                     dataType: 'jsonp',
                     jsonpCallback: 'logResults',
                     type: 'GET',
                     success: function(data) {
                         var obj = data['query']['pages'];
                         $.each(obj, function(key,value) {
-                            $(".results").append('<div class="appear" style="display:none"><h2 class="title">' + this.title + ':</h2><p class="extract">' + this.extract + '</p>');
+                            $(".results-container").append('<div class="individual-result appear" style="display:none"><h2 class="title">' + this.title + ':</h2><p class="extract">' + this.extract + '</p>');
                             $('.appear').show('slow');
                         });
                     }
