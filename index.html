@@ -8,18 +8,25 @@
         
         <title>Wikipedia Viewer</title>
         
+        <!-- Fontawesome -->
+        <script src="https://use.fontawesome.com/780ce05cc4.js"></script>
+        
+        <!-- Styles -->
         <link rel="stylesheet" href="style.css">
         
     </head>
     
-    <h1>Wikipedia Viewer</h1>
-    <form>
-        <input type="text" placeholder="Search" required>
-        <button type="submit">Search</button>
-    </form>
-    <div class="results"></div>
-    
     <body>
+        
+        <div class="container">
+            <h1>Wikipedia Viewer</h1>
+            <form>
+                <input type="text" required>
+                <button type="submit">
+                    <i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
+            </form>
+            <div class="results"></div>
+        </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
