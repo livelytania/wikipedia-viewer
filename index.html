@@ -17,6 +17,7 @@
         <input type="text" placeholder="Search" required>
         <button type="submit">Search</button>
     </form>
+    <div class="results"></div>
     
     <body>
         
@@ -28,8 +29,11 @@
                 
                 event.preventDefault();
                 
+                // clear previous search results
+                $('.results').empty();
+                
+                // get user input
                 var keyword = $('input').val();
-                console.log(keyword);
                 
                 // make a GET request to the English MediaWiki API, using jsonp to send and receive data from remote servers
                 
@@ -41,10 +45,10 @@
                     jsonpCallback: 'logResults',
                     type: 'GET',
                     success: function(data) {
-                        alert('sucess');
                         var obj = data['query']['pages'];
                         $.each(obj, function(key,value) {
-                            console.log(this.title + ": " + this.extract);
+                            $(".results").append('<div class="appear" style="display:none"><h2 class="title">' + this.title + ':</h2><p class="extract">' + this.extract + '</p>');
+                            $('.appear').show('slow');
                         });
                     }
                 });
