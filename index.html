@@ -24,6 +24,30 @@
         
         <script type="text/javascript">
             
+            $('button').click(function(event) {
+                
+                event.preventDefault();
+                
+                var keyword = $('input').val();
+                console.log(keyword);
+                
+                // make an HTTP GET request to the English MediaWiki API
+                $.ajax({
+
+                    url: 'https://en.wikipedia.org/w/api.php?action=query&titles=' + keyword + '&prop=revisions&rvprop=content&format=json',
+                    dataType: 'json',
+                    type: 'GET',
+                    headers: { 'Api-User-Agent': 'https://livelytania.github.io/wikipedia-viewer/' },
+                    success: function(data) {
+                        
+                        alert('success');
+
+                    }
+
+                });
+                
+            });
+            
         </script>
         
     </body>
