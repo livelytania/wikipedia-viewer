@@ -31,20 +31,19 @@
                 var keyword = $('input').val();
                 console.log(keyword);
                 
-                // make an HTTP GET request to the English MediaWiki API
-                $.ajax({
-
+                // make a GET request to the English MediaWiki API, using jsonp to send and receive data from remote servers
+                
+                function logResults(json) {console.log(json);}
+                
+                $.ajax( {
                     url: 'https://en.wikipedia.org/w/api.php?action=query&titles=' + keyword + '&prop=revisions&rvprop=content&format=json',
-                    dataType: 'json',
+                    dataType: 'jsonp',
+                    jsonpCallback: 'logResults',
                     type: 'GET',
-                    headers: { 'Api-User-Agent': 'https://livelytania.github.io/wikipedia-viewer/' },
                     success: function(data) {
-                        
-                        alert('success');
-
+                       alert('success');
                     }
-
-                });
+                } );
                 
             });
             
